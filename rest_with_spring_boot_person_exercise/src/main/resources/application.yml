@@ -1,1 +1,17 @@
-spring.application.name=rest_with_spring_boot_person_exercise
+spring:
+  application:
+    name: rest_with_spring_boot_person_exercise
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/rest_with_spring_boot?useTimezone=true&serverTimezone=UTC
+    username: root
+    password: 1234567
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+    show-sql: false
+
+    open-in-view: false
+#spring.jpa.open-in-view
