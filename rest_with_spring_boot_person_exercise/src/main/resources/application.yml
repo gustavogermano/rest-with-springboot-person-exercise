@@ -12,6 +12,9 @@ spring:
     properties:
       hibernate:
     show-sql: false
-
     open-in-view: false
 #spring.jpa.open-in-view
+logging:
+  level:
+    # root: WARN
+    br.com.gustavo.rest_with_spring_boot_person_exercise: DEBUG
