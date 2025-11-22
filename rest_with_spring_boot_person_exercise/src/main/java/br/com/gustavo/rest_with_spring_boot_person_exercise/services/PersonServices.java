@@ -1,9 +1,12 @@
 package br.com.gustavo.rest_with_spring_boot_person_exercise.services;
 
-import br.com.gustavo.rest_with_spring_boot_person_exercise.data.dto.PersonDTO;
+import br.com.gustavo.rest_with_spring_boot_person_exercise.data.dto.v1.PersonDTO;
+import br.com.gustavo.rest_with_spring_boot_person_exercise.data.dto.v2.PersonDTOV2;
 import br.com.gustavo.rest_with_spring_boot_person_exercise.exception.ResourceNotFoundException;
 import static br.com.gustavo.rest_with_spring_boot_person_exercise.mapper.ObjectMapper.parseListObjects;
 import static br.com.gustavo.rest_with_spring_boot_person_exercise.mapper.ObjectMapper.parseObject;
+
+import br.com.gustavo.rest_with_spring_boot_person_exercise.mapper.custom.PersonMapper;
 import br.com.gustavo.rest_with_spring_boot_person_exercise.model.Person;
 import br.com.gustavo.rest_with_spring_boot_person_exercise.repository.PersonRepository;
 import org.slf4j.Logger;
@@ -23,6 +26,9 @@ public class PersonServices {
 
     @Autowired
     PersonRepository repository;
+
+    @Autowired
+    PersonMapper converter;
 
 
 
@@ -47,6 +53,14 @@ public class PersonServices {
         var entity = parseObject(person, Person.class);
 
         return parseObject(repository.save(entity), PersonDTO.class);
+    }
+
+    public PersonDTOV2 createV2(PersonDTOV2 person) {
+        logger.info("Creating one Person V2");
+
+        var entity = converter.convertDTOtoEntity(person);
+
+        return converter.convertEntityToDTO(repository.save(entity));
     }
 
     public PersonDTO update(PersonDTO person) {

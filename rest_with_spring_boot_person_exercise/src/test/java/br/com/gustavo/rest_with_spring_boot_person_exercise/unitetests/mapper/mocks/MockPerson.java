@@ -3,7 +3,7 @@ package br.com.gustavo.rest_with_spring_boot_person_exercise.unitetests.mapper.m
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.gustavo.rest_with_spring_boot_person_exercise.data.dto.PersonDTO;
+import br.com.gustavo.rest_with_spring_boot_person_exercise.data.dto.v1.PersonDTO;
 import br.com.gustavo.rest_with_spring_boot_person_exercise.model.Person;
 
 public class MockPerson {
