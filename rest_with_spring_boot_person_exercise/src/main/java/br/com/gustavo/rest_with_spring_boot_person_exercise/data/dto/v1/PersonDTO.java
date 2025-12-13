@@ -1,11 +1,13 @@
 package br.com.gustavo.rest_with_spring_boot_person_exercise.data.dto.v1;
 
+import org.springframework.hateoas.RepresentationModel;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
 
-public class PersonDTO implements Serializable {
+public class PersonDTO extends RepresentationModel<PersonDTO> implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
