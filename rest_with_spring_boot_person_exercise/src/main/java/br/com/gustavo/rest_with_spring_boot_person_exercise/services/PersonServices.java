@@ -3,6 +3,7 @@ package br.com.gustavo.rest_with_spring_boot_person_exercise.services;
 import br.com.gustavo.rest_with_spring_boot_person_exercise.controllers.PersonController;
 import br.com.gustavo.rest_with_spring_boot_person_exercise.data.dto.v1.PersonDTO;
 import br.com.gustavo.rest_with_spring_boot_person_exercise.data.dto.v2.PersonDTOV2;
+import br.com.gustavo.rest_with_spring_boot_person_exercise.exception.RequiredObjectIsNullException;
 import br.com.gustavo.rest_with_spring_boot_person_exercise.exception.ResourceNotFoundException;
 import static br.com.gustavo.rest_with_spring_boot_person_exercise.mapper.ObjectMapper.parseListObjects;
 import static br.com.gustavo.rest_with_spring_boot_person_exercise.mapper.ObjectMapper.parseObject;
@@ -18,13 +19,11 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 
 
 @Service
 public class PersonServices {
 
-    private final AtomicLong counter = new AtomicLong();
     private Logger logger = LoggerFactory.getLogger(PersonServices.class.getName());
 
     @Autowired
@@ -55,6 +54,9 @@ public class PersonServices {
     }
 
     public PersonDTO create(PersonDTO person) {
+
+        if(person == null) throw new RequiredObjectIsNullException();
+
         logger.info("Creating one Person");
 
         var entity = parseObject(person, Person.class);
@@ -65,6 +67,7 @@ public class PersonServices {
     }
 
     public PersonDTOV2 createV2(PersonDTOV2 person) {
+
         logger.info("Creating one Person V2");
 
         var entity = converter.convertDTOtoEntity(person);
@@ -73,6 +76,9 @@ public class PersonServices {
     }
 
     public PersonDTO update(PersonDTO person) {
+
+        if(person == null) throw new RequiredObjectIsNullException();
+
         logger.info("Updating one Person");
 
         Person entity = repository.findById(person.getId())
