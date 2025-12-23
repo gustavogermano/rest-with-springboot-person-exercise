@@ -18,3 +18,8 @@ logging:
   level:
     # root: WARN
     br.com.gustavo.rest_with_spring_boot_person_exercise: DEBUG
+spring-doc:
+  paths-to-match: /api/**/v1/**
+  swagger-ui:
+    use-root-path: true
+
